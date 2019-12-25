@@ -5,50 +5,43 @@ const { Client, Attachment } = require('discord.js');
 const client = new Client();
 
 client.on('ready', () => {
-    console.log('I am ready!');
-   var extras = new Array();
-   for(var a = 0; a < 100; a ++){
-    extras[a] = new Array(2);
-    extras[a][1] = 0;
-   }
-    //REDACTED|REDACTED
-    //REDACTED|REDACTED
-    //REDACTED|REDACTED
-    //REDACTED|REDACTED
-    //REDACTED|REDACTED
+   //log 
+   console.log('I am ready!');
+   //Server users
+   //REDACTED|REDACTED
+   //REDACTED|REDACTED
+   //REDACTED|REDACTED
+   //REDACTED|REDACTED
+   //REDACTED|REDACTED 
 });
-
+//On message trigger
 client.on('message', message => {
-    
+     //print sender ID and username to console
      console.log(message.author.id.toString() + "|" +message.author.username.toString());
-     
-
+     //alternates the case of every other character in the message, hereby "mocking" it. 
      if(message.author.id.toString() === 'REDACTED' && !message.content.toString().includes('$w') && !message.content.toString().includes('$mmr') && !message.content.toString().includes('$im')
-     && !message.content.toString().includes('$divorce')  && !message.content.toString().includes('$')){ //Shaxx
+     && !message.content.toString().includes('$divorce')  && !message.content.toString().includes('$')){
         var filthyMessage = message.content.toString();
         var mockedMessage = new Array(filthyMessage.length);
         for(var a = 0; a < filthyMessage.length; a++){
             if(a%2===0){
-               
                 mockedMessage[a] = filthyMessage[a].toLowerCase().toString();
             } else{
-                mockedMessage[a] = filthyMessage.charAt(a).toUpperCase();
-                
+                mockedMessage[a] = filthyMessage.charAt(a).toUpperCase();            
             }
         }
-        var mockedResult = mockedMessage.toString().replace(/,/g, '');
-        //console.log(mockedResult);
-        message.channel.send(mockedResult.toString());
-        const attachment = new Attachment('https://imgflip.com/s/meme/Mocking-Spongebob.jpg');
-        message.channel.send(attachment);
+        var mockedResult = mockedMessage.toString().replace(/,/g, ''); //replace every ',' in the mockedMessage with nothing using RegEx
+        message.channel.send(mockedResult.toString());//send the result
+        const attachment = new Attachment('https://imgflip.com/s/meme/Mocking-Spongebob.jpg'); //create spongebob attachment
+        message.channel.send(attachment); //send attachment
      }
 
-    if (message.author.id.toString() === 'REDACTED') {
+    if (message.author.id.toString() === 'REDACTED') { //fetch the bots message, extract the name from it, and query the information by using the $im bot command
+        
         try {
             console.log(message.embeds[0].author.name);     
             if (!message.embeds[0].description.includes("Claims") && !message.embeds[0].description.includes("AVG") && !message.embeds[0].description.includes("Sum of the 15")){
                 setTimeout(function(){ message.channel.send("$im " + message.embeds[0].author.name); }, 500);
-
             }
         }
         catch (error) {
@@ -56,7 +49,7 @@ client.on('message', message => {
         }
     }
    
-    if (message.content === '%extraRoll') {
+    if (message.content === '%extraRoll') { //extra roll that anyone can claim, disabled for now
         message.channel.send("This feature is disabled for now."); 
         /*
         if(!(message.author.id.toString() === '252252849382227969')){ //BigShaxx
@@ -65,13 +58,13 @@ client.on('message', message => {
         */   
     }
   
-   if (message.content === '%help') {
-        message.channel.send('📠Owner/dev: prostotin📠\n📖 %help\n👋 %greet\n🍚 %1989\n㊗️ %uwu\n🍝 %pasta\n');
-    } else if (message.content === '%uwu') {
+   if (message.content === '%help') { //print available commands
+        message.channel.send('📠Owner/dev: prostotin📠\n📖 %help\n👋 %greet\n㊗️ %uwu\n🍝 %pasta\n');
+    } else if (message.content === '%uwu') { //print pasta
         message.channel.send('redacted');
-    } else if (message.content === '%greet') {
+    } else if (message.content === '%greet') { //OS prof greeting
         message.channel.send('Hey folks');
-    }  else if (message.content === '%pasta') {
+    }  else if (message.content === '%pasta') { //pick a random copypasta and send it. 
         var rand = Math.floor(Math.random() * 10);
         var pastas = ['redacted',
         'redacted',
@@ -88,4 +81,4 @@ client.on('message', message => {
  
 });
 
-client.login('');
+client.login(''); //login with your token 
